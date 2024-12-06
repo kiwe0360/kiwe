@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHD Interactive Quiz</title>
+    <style>
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f0f8ff; 
+            color: #00008b; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .quiz-container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 20px 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00008b;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        label {
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .info {
+            font-size: 18px;
+            margin-left: 5px;
+            cursor: pointer;
+            color: #1e90ff;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .info:hover {
+            transform: scale(1.3);
+            color: #00008b;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            background: #1e90ff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #00008b;
+            transform: scale(1.1);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .correct {
+            color: #1e90ff;
+            animation: pop 0.6s ease;
+        }
+
+        .incorrect {
+            color: #dc143c; 
+            animation: pop 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>ADHD Awareness Quiz</h1>
+        <form id="adhdQuiz">
+            
+            <div class="question">
+                <p>1. ADHD stands for: <span class="info" title="Click for a hint!">❓</span></p>
+                <input type="radio" id="q1a" name="q1" value="wrong">
+                <label for="q1a">Attention Deficit Hyperness Disorder</label><br>
+                <input type="radio" id="q1b" name="q1" value="right">
+                <label for="q1b">Attention Deficit Hyperactivity Disorder</label><br>
+                <input type="radio" id="q1c" name="q1" value="wrong">
+                <label for="q1c">Active Deficit Hyperactivity Disorder</label><br>
+            </div>
+
+            
+            <div class="question">
+                <p>2. ADHD is primarily diagnosed in: <span class="info" title="Think about age groups!">❓</span></p>
+                <input type="radio" id="q2a" name="q2" value="right">
+                <label for="q2a">Children</label><br>
+                <input type="radio" id="q2b" name="q2" value="wrong">
+                <label for="q2b">Elderly</label><br>
+                <input type="radio" id="q2c" name="q2" value="wrong">
+                <label for="q2c">Middle-aged Adults</label><br>
+            </div>
+
+            
+            <div class="question">
+                <p>3. ADHD can be treated using: <span class="info" title="Think about therapies or meds!">❓</span></p>
+                <input type="radio" id="q3a" name="q3" value="wrong">
+                <label for="q3a">Surgery</label><br>
+                <input type="radio" id="q3b" name="q3" value="right">
+                <label for="q3b">Therapy and medication</label><br>
+                <input type="radio" id="q3c" name="q3" value="wrong">
+                <label for="q3c">None</label><br>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="checkAnswers()">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        
+        function checkAnswers() {
+            const quizForm = document.getElementById("adhdQuiz");
+            const resultDiv = document.getElementById("result");
+            let score = 0;
+            let feedback = "you can try again in the next session";
+
+            
+            const q1 = quizForm.q1.value;
+            if (q1 === "right") {
+                score++;
+                feedback += "<p class='correct'>✔ Question 1: Correct!</p>";
+            } else {
+                feedback += "<p class='incorrect'>✘ Question 1: Incorrect. It's 'Attention Deficit Hyperactivity Disorder.'</p>";
+            }
+
+            
+            const q2 = quizForm.q2.value;
+            if (q2 === "right") {
+                score++;
+                feedback += "<p class='correct'>✔ Question 2: Correct!</p>";
+            } else {
+                feedback += "<p class='incorrect'>✘ Question 2: Incorrect. It can be diagnosed in children.</p>";
+            }
+
+        
+            const q3 = quizForm.q3.value;
+            if (q3 === "right") {
+                score++;
+                feedback += "<p class='correct'>✔ Question 3: Correct!</p>";
+            } else {
+                feedback += "<p class='incorrect'>✘ Question 3: Incorrect. Treatment includes therapy and medication.</p>";
+            }
+
+            
+            resultDiv.innerHTML = `
+                <p>You scored ${score}/3!</p>
+                ${feedback}
+            `;
+        }
+    </script>
+</body>
+</html>
