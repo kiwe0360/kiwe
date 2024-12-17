@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Times Up Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #1b1464, #6f1e51);
+            color: white;
+            text-align: center;
+            padding: 2em;
+        }
+
+        header {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+
+        #clock {
+            font-size: 2em;
+            margin: 1em 0;
+        }
+
+        #progress-bar {
+            width: 80%;
+            max-width: 600px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 1em auto;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: orange;
+            transition: width 0.5s ease;
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+            margin: 1em 0;
+        }
+
+        .options li {
+            margin: 0.5em 0;
+        }
+
+        button {
+            background: orange;
+            color: white;
+            padding: 0.5em 2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background: darkorange;
+        }
+    </style>
+</head>
+<body>
+
+<header>Times Up!</header>
+
+
+<div id="clock">10:00:00</div>
+
+
+<div id="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+</div>
+
+
+<div id="quiz-area">
+    <div class="question-container" id="question-1">
+        <h2>What is the capital of Malawi?</h2>
+        <ul class="options">
+            <li><input type="radio" name="q1" value="Paris"> Paris</li>
+            <li><input type="radio" name="q1" value="Lilongwe"> Lilongwe</li>
+            <li><input type="radio" name="q1" value="Berlin"> Berlin</li>
+        </ul>
+        <button onclick="nextQuestion(1, 'Paris')">Next</button>
+    </div>
+
+    <div class="question-container" id="question-2">
+        <h2>How many hours of sleep are recommended for adults?</h2>
+        <ul class="options">
+            <li><input type="radio" name="q2" value="6"> 6</li>
+            <li><input type="radio" name="q2" value="8"> 8</li>
+            <li><input type="radio" name="q2" value="10"> 10</li>
+        </ul>
+        <button onclick="nextQuestion(2, '8')">Next</button>
+    </div>
+
+    <div class="question-container" id="question-3">
+        <h2>What has hands but can’t clap?</h2>
+        <ul class="options">
+            <li><input type="radio" name="q3" value="Clock"> Clock</li>
+            <li><input type="radio" name="q3" value="Chair"> Chair</li>
+            <li><input type="radio" name="q3" value="Table"> Table</li>
+        </ul>
+        <button onclick="finishQuiz()">Submit</button>
+    </div>
+</div>
+
+
+<script>
+    let score = 0;
+    let currentQuestion = 0;
+    let timeRemaining = 600000; 
+
+    
+    function startTimer() {
+        setInterval(() => {
+            timeRemaining -= 10;
+            const minutes = String(Math.floor(timeRemaining / 60000)).padStart(2, '0');
+            const seconds = String(Math.floor((timeRemaining % 60000) / 1000)).padStart(2, '0');
+            const milliseconds = String(timeRemaining % 1000).padStart(3, '0');
+            document.getElementById("clock").textContent = `${minutes}:${seconds}:${milliseconds}`;
+
+            if (timeRemaining <= 0) {
+                alert("Time's Up!");
+                finishQuiz();
+            }
+        }, 10);
+    }
+
+    
+    function nextQuestion(questionNumber, correctAnswer) {
+        const selected = document.querySelector(`input[name="q${questionNumber}"]:checked`);
+        if (!selected) {
+            alert("Please select an answer.");
+            return;
+        }
+
+        if (selected.value === correctAnswer) score++;
+
+        document.getElementById(`question-${questionNumber}`).classList.remove("active");
+        const nextQuestion = document.getElementById(`question-${questionNumber + 1}`);
+        if (nextQuestion) {
+            nextQuestion.classList.add("active");
+            updateProgress(questionNumber);
+        }
+    }
+
+    
+    function updateProgress(questionNumber) {
+        const progress = (questionNumber / 3) * 100;
+        document.getElementById("progress-fill").style.width = `${progress}%`;
+    }
+
+    
+    function finishQuiz() {
+        alert(`Quiz Complete! You got ${score} out of 3 correct.`);
+        location.reload();
+    }
+
+    
+    document.getElementById("question-1").classList.add("active");
+    startTimer();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - SkillsPro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to top, #1b1f3b, #0a192f);
+      color: #ccd6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signin-container {
+      background: url('./assets/technology-6701504_1280.jpg')
+      height 100vh;
+      display :flex ;
+      justify-content  :center;
+      align-items: center;
+      padding: 20px;
+    }                  /*what am i doing wrong, can you fix it? cant put the background image in place*/
+
+    .signin-form {
+      background: rgba(17, 34, 64, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .signin-form h1 {
+      font-size: 2.5em;
+      color: #e88e00;
+      font-family: "Chiller", sans-serif;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .signin-form h2 {
+      color: #ccd6f6;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      background: #112240;
+      color: white;
+      outline: none;
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #8892b0;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      color: #e88e00;
+      font-size: 0.75em;
+    }
+
+    .signin-form button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      background: #e88e00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .signin-form button:hover {
+      background: #e85b2a;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(255, 127, 80, 0.6);
+    }
+
+    .signin-form p {
+      color: #ccd6f6;
+      font-size: 0.9em;
+      margin-top: 15px;
+    }
+
+    .signin-form a {
+      color: #e88e00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signin-form a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="signin-container">
+  <form class="signin-form">
+    <h1>SkillsPro</h1>
+    <h2>Sign In</h2>
+    <h5>sign back in to continue enjoying our lessons</h5> <!--dont know how to spelll continew, dont laugh-->
+
+    <div class="form-group">
+      <input type="email" placeholder=" " required>
+      <label>Email</label>
+    </div>
+
+    <div class="form-group">
+      <input type="password" placeholder=" " required>
+      <label>Password</label>
+    </div>
+
+    <button type="submit">Log In</button>
+
+    <p>Don't have an account? <a href="eeish">Sign Up</a></p>
+  </form>
+</div>
+
+</body>
+</html>
